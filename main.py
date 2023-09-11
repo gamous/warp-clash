@@ -33,11 +33,11 @@ with open("result.csv","r",encoding="utf-8") as f:
 
 template=template.replace("{{private_key}}",pk)\
                  .replace("{{server_A}}",result[0][0]).replace("{{port_A}}",result[0][1])\
-                 .replace("{{server_B}}",result[0][0]).replace("{{port_B}}",result[0][1])\
-                 .replace("{{server_C}}",result[0][0]).replace("{{port_C}}",result[0][1])\
-                 .replace("{{server_D}}",result[0][0]).replace("{{port_D}}",result[0][1])\
-                 .replace("{{server_E}}",result[0][0]).replace("{{port_E}}",result[0][1])\
-                 .replace("{{server_F}}",result[0][0]).replace("{{port_F}}",result[0][1])
+                 .replace("{{server_B}}",result[1][0]).replace("{{port_B}}",result[1][1])\
+                 .replace("{{server_C}}",result[2][0]).replace("{{port_C}}",result[2][1])\
+                 .replace("{{server_D}}",result[3][0]).replace("{{port_D}}",result[3][1])\
+                 .replace("{{server_E}}",result[4][0]).replace("{{port_E}}",result[4][1])\
+                 .replace("{{server_F}}",result[5][0]).replace("{{port_F}}",result[5][1])
 
 with open("clash.yml","w+",encoding="utf-8") as f:
     f.write(template)
