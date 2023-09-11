@@ -11,7 +11,7 @@ srckey=random.choice(keys).strip()
 print(srckey)
 
 pk=WireGuard.genkey()
-newkey=clone_key("7fV850qW-30YsdL48-9p7xPH68",WireGuard.pubkey(pk))
+newkey=clone_key(srckey,WireGuard.pubkey(pk))
 
 with open("wireguard.conf","w+",encoding="utf-8") as f:
     lines= ["[Interface]",
