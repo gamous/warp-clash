@@ -1,5 +1,4 @@
 chcp 936
-cls
 @echo off & setlocal enabledelayedexpansion
 goto start
 
@@ -111,6 +110,5 @@ set %%i=
 
 warp
 del ip.txt > nul 2>&1
-echo 请按任意键关闭窗口
-pause > nul
+echo 筛选IP完成
 exit

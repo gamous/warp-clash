@@ -2,15 +2,23 @@ from wireguard import WireGuard
 from warpapi import clone_key
 import random,os
 
+
 os.system("warp-yxip.bat")
+
+with open("result.csv","r",encoding="utf-8") as f:
+    result=list(map(lambda l:l.split(',')[0].split(':'),f.readlines()[1:7]))
+
+with open("template.yml","r",encoding="utf-8") as f:
+    template=f.read()
 
 with open("basekeys.txt","r",encoding="utf-8") as f:
     keys=f.readlines()
 
 srckey=random.choice(keys).strip()
-print(srckey)
+print(f"[succ] choice a source 24PB-key: {srckey}")
 
 pk=WireGuard.genkey()
+print(f"[succ] start clone with private key: {pk}")
 newkey=clone_key(srckey,WireGuard.pubkey(pk))
 
 with open("wireguard.conf","w+",encoding="utf-8") as f:
@@ -25,11 +33,7 @@ with open("wireguard.conf","w+",encoding="utf-8") as f:
             "AllowedIPs = ::/0",
             "Endpoint = engage.cloudflareclient.com:2408"]
     f.write("\n".join(lines))
-
-with open("template.yml","r",encoding="utf-8") as f:
-    template=f.read()
-with open("result.csv","r",encoding="utf-8") as f:
-    result=list(map(lambda l:l.split(',')[0].split(':'),f.readlines()[1:7]))
+print("[succ] wireguard.conf generated")
 
 template=template.replace("{{private_key}}",pk)\
                  .replace("{{server_A}}",result[0][0]).replace("{{port_A}}",result[0][1])\
@@ -41,3 +45,4 @@ template=template.replace("{{private_key}}",pk)\
 
 with open("clash.yml","w+",encoding="utf-8") as f:
     f.write(template)
+print("[succ] clash.yml generated")
